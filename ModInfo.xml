@@ -1,0 +1,3 @@
+<mod displayName="Creation Sharing Metadata" unique="AssetSharing" description="Adds a viewonline cheat to quickly open creations on Spore.com (even modded creations!), and an assetmetadata cheat to view creation metadata." installerSystemVersion="1.0.1.1" dllsBuild="2.5.179.0" hasCustomInstaller="false" isExperimental="false" requiresGalaxyReset="false" causesSaveDataDependency="false">
+    <prerequisite>AssetSharing.dll</prerequisite>
+</mod>
