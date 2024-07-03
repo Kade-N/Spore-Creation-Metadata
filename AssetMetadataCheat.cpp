@@ -41,9 +41,35 @@ void AssetMetadataCheat::PrintMetadata(uint32_t instanceId, uint32_t groupId)
 	cAssetMetadataPtr metadata;
 	if (!Pollinator::GetMetadata(instanceId, groupId, metadata)) {
 		App::ConsolePrintF("Asset metadata not found for %X!%X", groupId, instanceId);
+
+		// This was probably some testing code, don't think it's needed but I don't quite remember why this was here
+		//list<Resource::IResourceFactory*> factories;
+		//ResourceManager.GetFactoryList(factories);
+		//for each (auto factory in factories)
+		//{
+		//	App::ConsolePrintF("%X:", factory->GetFactoryType());
+
+		//	uint32_t types[10];
+		//	factory->GetSupportedTypes(types, 10);
+		//	string typesString = "";
+		//	for each (auto type in types)
+		//	{
+		//		if (auto typeName = ResourceManager.GetTypenameFromType(type))
+		//		{
+		//			App::ConsolePrintF("  %ls", typeName);
+		//		}
+		//		else
+		//		{
+		//			//App::ConsolePrintF("  %X", type);
+		//		}
+		//	}
+		//}
 	}
 	else {
-		App::ConsolePrintF("Asset metadata for %X!%X:", groupId, instanceId);
+		string16 fileName;
+		ResourceManager.GetNameFromKey(metadata->GetAssetKey(), fileName);
+
+		App::ConsolePrintF("Asset metadata for %ls:", fileName);
 		App::ConsolePrintF("- Name: %ls", metadata->GetName().c_str());
 		App::ConsolePrintF("- Server ID: %I64d", metadata->GetAssetID());
 		App::ConsolePrintF("- Author: %ls (%I64d)", metadata->GetAuthor().c_str(), metadata->GetAuthorID());
@@ -52,5 +78,23 @@ void AssetMetadataCheat::PrintMetadata(uint32_t instanceId, uint32_t groupId)
 		App::ConsolePrintF("- Created at %I64d, Downloaded at %I64d", metadata->GetTimeCreated(), metadata->GetTimeDownloaded());
 		App::ConsolePrintF("- Shareable: %s", metadata->IsShareable() ? "true" : "false");
 		App::ConsolePrintF("- Localized: %s", metadata->IsLocalized() ? "true" : "false");
+
+		string16 tagsString = u"";
+		for each (auto tag in metadata->GetTags())
+		{
+			tagsString += tag + u", ";
+		}
+		App::ConsolePrintF("- Tags: %ls", tagsString);
+
+		string dataString = "";
+		for each (auto item in metadata->GetAuthors())
+		{
+			dataString += item + ", ";
+		}
+		App::ConsolePrintF("- Data: %s", dataString);
+
+		string16 databasePath = u"unknown";
+		if (auto database = ResourceManager.FindDatabase(metadata->GetAssetKey())) databasePath = database->GetLocation();
+		App::ConsolePrintF("- Database: %ls", databasePath);
 	}
 }

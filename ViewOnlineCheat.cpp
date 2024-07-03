@@ -74,13 +74,13 @@ void ViewOnlineCheat::OpenAssetWebpage(uint32_t instanceId, uint32_t groupId, As
 	switch (website)
 	{
 	case Sporepedia:
-		url = u"http://www.spore.com/sporepedia#qry=ast-" + assetId + u":sast-" + assetId;
+		url = u"https://www.spore.com/sporepedia#qry=ast-" + assetId + u":sast-" + assetId;
 		break;
 	case Pollinator:
-		url = u"http://pollinator.spore.com/pollinator/admin/asset/" + assetId;
+		url = u"https://pollinator.spore.com/pollinator/admin/asset/" + assetId;
 		break;
 	case Model:
-		url = u"http://static.spore.com/static/model/" + splitId + u"/" + assetId + u".xml";
+		url = u"https://static.spore.com/static/model/" + splitId + u"/" + assetId + u".xml";
 		break;
 	case CommunitySporepedia:
 		url = u"https://sporecommunity.com/assets/" + assetId;
